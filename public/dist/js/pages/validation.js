@@ -95,13 +95,13 @@ function validate4(){
     errNode4.html("");
     phoneNode.css({border:'2px green solid',backgroundColor:'yellow'});
     let phone=phoneNode.val();
-    let regexpress=new RegExp("^\+?[0-9]{13}$");
+    let regexpress=/^\+?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{7})$/;
     if(phone===""){
         errNode4.html("<b>this field is required.</b>");
         phoneNode.css({border:'2px red solid',backgroundColor:'pink'});
         return false;
     }
-    else if(!regexpress.test(phone)&& phone.length){
+    else if(!regexpress.test(phone)){
         errNode4.html("<b>Password should be aplhanumeric* and not use duplicate</b>");
         phoneNode.css({border:'2px red solid',backgroundColor:'pink'});
         return false;
@@ -110,7 +110,6 @@ function validate4(){
         return true;
 
 }
-   
 function validate5(){
     errNode5.html("");
     cityNode.css({border:'2px green solid',backgroundColor:'yellow'});
@@ -131,9 +130,15 @@ function validate6()
     let image=imageNode.val();
     var allowedExtensions = 
     /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    var file_size = $('#image')[0].files[0].size;
     if(image==="")
     {
         errNode7.html("<b>this field is required.</b>");
+        imageNode.css({border:'2px red solid',backgroundColor:'pink'});
+        return false;
+    }
+    else if(file_size>300000) {
+        errNode7.html("<b>Invalid file size</b>");
         imageNode.css({border:'2px red solid',backgroundColor:'pink'});
         return false;
     }
